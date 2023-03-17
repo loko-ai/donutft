@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from donutft.apps.dataset import DonutDataset
 from donutft.apps.ptl import DonutModelPLModule
 import pytorch_lightning as pl
+import torch
 
 dataset = load_dataset("naver-clova-ix/cord-v2")
 print(dataset)
@@ -46,13 +47,13 @@ val_dataset = DonutDataset("naver-clova-ix/cord-v2", max_length=max_length,
 train_dataloader = DataLoader(train_dataset, batch_size=1, shuffle=True, num_workers=4)
 val_dataloader = DataLoader(val_dataset, batch_size=1, shuffle=False, num_workers=4)
 
-config = {"max_epochs": 30,
-          "val_check_interval": 0.2,  # how many times we want to validate during an epoch
+config = {"max_epochs": 1,
+          "val_check_interval": 0.5,  # how many times we want to validate during an epoch
           "check_val_every_n_epoch": 1,
           "gradient_clip_val": 1.0,
-          "num_training_samples_per_epoch": 400,
+          "num_training_samples_per_epoch": 800,
           "lr": 3e-5,
-          "train_batch_sizes": [4],
+          "train_batch_sizes": [8],
           "val_batch_sizes": [1],
           # "seed":2022,
           "num_nodes": 1,
@@ -79,3 +80,5 @@ trainer = pl.Trainer(
 )
 
 trainer.fit(model_module)
+
+torch.save(model_module.state_dict(), "./model.pth")
