@@ -30,6 +30,10 @@ model.config.decoder_start_token_id = processor.tokenizer.convert_tokens_to_ids(
 processor.image_processor.size = image_size[::-1]  # should be (width, height)
 processor.image_processor.do_align_long_axis = False
 
+model.save_pretrained("./mm")
+processor.save_pretrained("./mm")
+exit()
+
 train_dataset = DonutDataset("naver-clova-ix/cord-v2", max_length=max_length,
                              split="train", task_start_token="<s_cord-v2>", prompt_end_token="<s_cord-v2>",
                              sort_json_key=False,  # cord dataset is preprocessed, so no need for this,
@@ -79,6 +83,7 @@ trainer = pl.Trainer(
     callbacks=[early_stop_callback],
 )
 
-trainer.fit(model_module)
+# trainer.fit(model_module)
 
-torch.save(model_module.state_dict(), "./model.pth")
+
+# torch.save(model_module.state_dict(), "./model.pth")

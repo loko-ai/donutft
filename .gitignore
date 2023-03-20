@@ -6,3 +6,5 @@ venv
 dist
 __pycache__
 dist
+ICDAR-2019-SROIE
+ftdata
