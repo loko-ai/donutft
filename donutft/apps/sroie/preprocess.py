@@ -184,6 +184,7 @@ training_args = Seq2SeqTrainingArguments(
     save_strategy="epoch",
     predict_with_generate=True,
     # push to hub parameters
+
     push_to_hub=False,
 )
 

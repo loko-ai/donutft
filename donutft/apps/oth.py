@@ -16,20 +16,23 @@ max_length = 768
 
 # update image_size of the encoder
 # during pre-training, a larger image size was used
-config = VisionEncoderDecoderConfig.from_pretrained("./mm")
-config.encoder.image_size = image_size  # (height, width)
+# config = VisionEncoderDecoderConfig.from_pretrained("./mm")
+# config.encoder.image_size = image_size  # (height, width)
 # update max_length of the decoder (for generation)
-config.decoder.max_length = max_length
+# config.decoder.max_length = max_length
 
-processor = DonutProcessor.from_pretrained("naver-clova-ix/donut-base-finetuned-cord-v2")
-model = VisionEncoderDecoderModel.from_pretrained("naver-clova-ix/donut-base-finetuned-cord-v2")
+# processor = DonutProcessor.from_pretrained("/home/fulvio/sroieft")
+# model = VisionEncoderDecoderModel.from_pretrained("/home/fulvio/sroieft")
+processor = DonutProcessor.from_pretrained("philschmid/donut-base-sroie")
+model = VisionEncoderDecoderModel.from_pretrained("philschmid/donut-base-sroie")
 
-model.save_pretrained("./gg")
-processor.save_pretrained("./gg")
+print(processor.tokenizer)
+# model.save_pretrained("./gg")
+# processor.save_pretrained("./gg")
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)
-task_prompt = "<s_cord-v2>"
+task_prompt = "<s>"
 decoder_input_ids = processor.tokenizer(task_prompt, add_special_tokens=False, return_tensors="pt").input_ids
 
 
@@ -55,7 +58,7 @@ def extract(image):
     return processor.token2json(sequence)
 
 
-img = Image.open("/home/fulvio/projects/donutft/data/scontrini-approvati-7.jpg")
+img = Image.open("/home/fulvio/projects/donutft/data/scontrino-fiscale.jpg")
 img = img.convert("RGB")
 
 print(extract(img))
