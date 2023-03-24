@@ -183,6 +183,7 @@ training_args = Seq2SeqTrainingArguments(
     evaluation_strategy="no",
     save_strategy="epoch",
     predict_with_generate=True,
+    no_cuda=True,
     # push to hub parameters
 
     push_to_hub=False,

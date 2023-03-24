@@ -1,11 +1,5 @@
 from PIL import Image
-from datasets import load_dataset
-from pytorch_lightning.callbacks import EarlyStopping
-from torch.utils.data import DataLoader
 
-from donutft.apps.dataset import DonutDataset
-from donutft.apps.ptl import DonutModelPLModule
-import pytorch_lightning as pl
 import torch
 import re
 
@@ -27,8 +21,6 @@ processor = DonutProcessor.from_pretrained("philschmid/donut-base-sroie")
 model = VisionEncoderDecoderModel.from_pretrained("philschmid/donut-base-sroie")
 
 print(processor.tokenizer)
-# model.save_pretrained("./gg")
-# processor.save_pretrained("./gg")
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)

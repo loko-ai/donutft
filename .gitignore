@@ -8,3 +8,6 @@ __pycache__
 dist
 ICDAR-2019-SROIE
 ftdata
+**/insurance_data
+data
+**/node_modules
