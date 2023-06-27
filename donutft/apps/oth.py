@@ -17,8 +17,8 @@ max_length = 768
 
 # processor = DonutProcessor.from_pretrained("/home/fulvio/sroieft")
 # model = VisionEncoderDecoderModel.from_pretrained("/home/fulvio/sroieft")
-processor = DonutProcessor.from_pretrained("philschmid/donut-base-sroie")
-model = VisionEncoderDecoderModel.from_pretrained("philschmid/donut-base-sroie")
+processor = DonutProcessor.from_pretrained("fatture_model")
+model = VisionEncoderDecoderModel.from_pretrained("fatture_model")
 
 print(processor.tokenizer)
 
@@ -50,7 +50,9 @@ def extract(image):
     return processor.token2json(sequence)
 
 
-img = Image.open("/home/fulvio/projects/donutft/data/scontrino-fiscale.jpg")
+img = Image.open("/var/opt/data/previnet/pngs/fattura/5811559-0.png")
 img = img.convert("RGB")
 
-print(extract(img))
+res = extract(img)
+
+print(res)
