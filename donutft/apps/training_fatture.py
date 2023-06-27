@@ -12,7 +12,7 @@ from donutft.business.preprocessing.processor import get_donut_processor
 from donutft.business.preprocessing.tokens import JSON2Token, Transform
 from donutft.model.donutmodel import get_donut_model
 
-source = Path(os.environ.get('SOURCE'))
+source = Path(os.environ.get('SOURCE', '/home/cecilia/loko/data/previnet'))
 
 js2t = JSON2Token()
 
@@ -69,7 +69,7 @@ training_args = Seq2SeqTrainingArguments(
     evaluation_strategy="no",
     save_strategy="epoch",
     predict_with_generate=True,
-    no_cuda=True,
+    no_cuda=False,
     # push to hub parameters
 
     push_to_hub=False,
