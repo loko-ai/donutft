@@ -62,7 +62,7 @@ class ImageAugmenter:
         augmentend_img_list.append(self._img_contrast(1.3))
         augmentend_img_list.append(self._img_sharpner(1.3))
         augmentend_img_list.append(self._img_brightner(1.3))
-        augmentend_img_list.append(self.img_brightner(0.8))
+        augmentend_img_list.append(self._img_brightner(0.8))
         augmentend_img_list.append(self._img_resize(0.2))
         augmentend_img_list.append(self._img_rotation(20))
         augmentend_img_list.append(self._img_rotation(5))
