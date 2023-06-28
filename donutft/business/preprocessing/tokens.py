@@ -1,3 +1,15 @@
+import sys
+
+from PIL import Image
+
+# import torchvision.transforms as T
+
+# import torchvision.transforms.functional as F
+
+# tensor_transformer = T.ToPILImage()
+
+
+
 class JSON2Token:
     def __init__(self):
 
@@ -48,8 +60,13 @@ class Transform:
         # create tensor from image
         try:
             pixel_values = self.processor(
-                sample["image"], random_padding=True, return_tensors="pt"
+                sample["image"], do_resize=True, resample=4, random_padding=True, return_tensors="pt"
             ).pixel_values.squeeze()
+            # img = F.to_pil_image(pixel_values.to("cpu"))
+            # img_name = "img_postproc/200_dpi_resampling4_align/img_" + str(img_id) + ".png"
+            # img.save(img_name)
+            # sys.exit(0)
+
         except Exception as e:
             print(sample)
             print(f"Error: {e}")
@@ -63,8 +80,10 @@ class Transform:
             padding="max_length",
             truncation=True,
             return_tensors="pt",
+
         )["input_ids"].squeeze(0)
 
         labels = input_ids.clone()
         labels[labels == self.processor.tokenizer.pad_token_id] = ignore_id  # model doesn't need to predict pad token
         return {"pixel_values": pixel_values, "labels": labels, "target_sequence": sample["text"]}
+
