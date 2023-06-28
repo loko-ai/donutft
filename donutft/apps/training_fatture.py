@@ -14,7 +14,7 @@ from donutft.model.donutmodel import get_donut_model
 
 import random
 
-import torchvision.transforms as T
+# import torchvision.transforms as T
 
 from donutft.utils.data_augmentation_utils import ImageAugmenter
 
